@@ -6,7 +6,7 @@
 /*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:29:34 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/08 17:36:47 by tomas            ###   ########.fr       */
+/*   Updated: 2025/01/08 20:03:18 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,5 @@ int main(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		return (1);
 	if (!argcheck(argv))
+		return (1);
 }
