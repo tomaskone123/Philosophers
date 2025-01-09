@@ -6,10 +6,16 @@
 /*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:03:30 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/08 20:03:42 by tomas            ###   ########.fr       */
+/*   Updated: 2025/01/09 12:11:18 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
+int	argcheck(char* argv)
+{
+	int	i;
 
+	i = 0;
+	while(ar)
+}
