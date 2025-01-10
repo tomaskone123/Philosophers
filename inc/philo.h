@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/10 18:06:14 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/10 18:41:59 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <pthread.h>
 # include <stdbool.h>
 # include <stdio.h>
+# include <stdlib.h>
 
 
 typedef struct s_philo
@@ -27,10 +28,6 @@ typedef struct s_philo
 	int				eating;
 	int				meals_eaten;
 	size_t			last_meal;
-	size_t			time_to_die;
-	size_t			tiem_to_eat;
-	size_t			time_to_sleep;
-	size_t			start_time;
 	int				nf;
 	int				num_times_to_eat;
 	int				*dead;
@@ -44,6 +41,10 @@ typedef struct s_philo
 
 typedef struct s_data
 {
+	size_t			time_to_die;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
+	size_t			start_time;
 	int				dead_flag;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
@@ -54,5 +55,9 @@ typedef struct s_data
 // Utils
 int	argcheck(char* argv[]);
 int	ft_atoi(const char *nptr);
+
+// Init
+int	init(char **argv, t_data *data, int argc);
+
 
 #endif
