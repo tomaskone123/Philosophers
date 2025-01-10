@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:03:30 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/10 18:13:01 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/10 18:16:21 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	argcheck(char* argv[])
 			if (argv[i][j] >= '0' && argv[i][j] <= '9')
 				j++;
 			else
+			{
+				printf("Error\nOne of the inputs wasn't a number");
 				return (0);
+			}
 		}
 		i++;
 	}
