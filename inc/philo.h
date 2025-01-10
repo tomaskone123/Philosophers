@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/09 12:19:23 by tomas            ###   ########.fr       */
+/*   Updated: 2025/01/10 18:06:14 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <limits.h>
 # include <pthread.h>
 # include <stdbool.h>
+# include <stdio.h>
+
 
 typedef struct s_philo
 {
@@ -48,5 +50,9 @@ typedef struct s_data
 	pthread_mutex_t	write_lock;
 	t_philo			*philos;
 }					t_data;
+
+// Utils
+int	argcheck(char* argv[]);
+int	ft_atoi(const char *nptr);
 
 #endif
