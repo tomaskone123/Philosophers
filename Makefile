@@ -1,13 +1,13 @@
 NAME		=	philo
 
-HEADER		=	./inc/
+HEADER		=	./inc
 
 CC			=	gcc
 
 CFLAGS		=	-Werror -Wall -Wextra -g -I $(HEADER) -pthread
 
 SRCS		=	src/main.c \
-				src/inti.c \
+				src/init.c \
 				src/utils.c \
 
 OBJS		=	$(SRCS:.c=.o)

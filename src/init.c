@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/14 19:12:55 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:21:01 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ int	init(char **argv, t_data *data, int argc)
 {
 	if (!init_data(argv, &data, argc))
 		return (0);
-
+	return (1);
 }
