@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:29:34 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/10 18:34:05 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:25:39 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int main(int argc, char **argv)
 		return (1);
 	if (!argcheck(argv))
 		return (1);
-	if (!init(argv, &data, argc))
+	if (!init(argv, &data))
 		return (1);
+	free_all(data);
 	return (0);
 }
 

@@ -4,7 +4,7 @@ HEADER		=	./inc
 
 CC			=	gcc
 
-CFLAGS		=	-Werror -Wall -Wextra -g -I $(HEADER) -pthread
+CFLAGS		=	-fsanitize=address -Werror -Wall -Wextra -g -I $(HEADER) -pthread
 
 SRCS		=	src/main.c \
 				src/init.c \

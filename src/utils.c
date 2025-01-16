@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:03:30 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/10 18:35:42 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:33:15 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,25 @@ int	ft_atoi(const char *nptr)
 	return (n * sign);
 }
 
-int	argcheck(char* argv[])
+static int	ft_isdigit(int c)
 {
+	if ((c >= '0' && c <= '9'))
+		return (1);
+	return (0);
+}
 
+int	argcheck(char *argv[])
+{
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	j = 0;
 	while (argv[i])
 	{
 		while (argv[i][j])
 		{
-			if (argv[i][j] >= '0' && argv[i][j] <= '9')
+			if (ft_isdigit(argv[i][j]))
 				j++;
 			else
 			{
