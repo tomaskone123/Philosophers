@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/16 18:26:08 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:23:35 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,37 @@ int	init_data(char **argv, t_data **data)
 
 int	free_all(t_data **data)
 {
+	int	i;
 
+	i = 0;
+	if ((*data)->philos)
+	{
+		while (i < (*data)->number_of_philos)
+		{
+			pthread_mutex_destroy(&((*data)->philos[i].meal_lock));
+			i++;
+		}
+		free((*data)->philos);
+	}
+	i = 0;
+	if ((*data)->forks)
+	{
+		while (i < (*data)->number_of_philos)
+		{
+			pthread_mutex_destroy(&((*data)->forks[i]));
+			i++;
+		}
+		free((*data)->forks);
+	}
+	free(*data);
+	*data = NULL;
+	return (1);
 }
 
 
-int	init(char **argv, t_data *data)
+int	init(char **argv, t_data **data)
 {
-	if (!init_data(argv, &data))
+	if (!init_data(argv, data))
 		return (0);
 	return (1);
 }

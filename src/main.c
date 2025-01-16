@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:29:34 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/16 18:25:39 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:22:03 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(int argc, char **argv)
 {
-	t_data	data;
+	t_data	*data;
 
 	if (argc < 5 || argc > 6)
 		return (1);
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 		return (1);
 	if (!init(argv, &data))
 		return (1);
-	free_all(data);
+	free_all(&data);
 	return (0);
 }
 

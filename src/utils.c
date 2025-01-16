@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:03:30 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/16 18:33:15 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:50:43 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,20 @@ int	argcheck(char *argv[])
 	j = 0;
 	while (argv[i])
 	{
+		j = 0;
 		while (argv[i][j])
 		{
 			if (ft_isdigit(argv[i][j]))
+			{
+				printf("%c", argv[i][j]);
 				j++;
+			}
 			else
 			{
 				printf("Error\nOne of the inputs wasn't a number");
 				return (0);
 			}
+			printf("\n");
 		}
 		i++;
 	}

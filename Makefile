@@ -4,7 +4,7 @@ HEADER		=	./inc
 
 CC			=	gcc
 
-CFLAGS		=	-fsanitize=address -Werror -Wall -Wextra -g -I $(HEADER) -pthread
+CFLAGS		=	-Werror -Wall -Wextra -g -I $(HEADER) -pthread
 
 SRCS		=	src/main.c \
 				src/init.c \
@@ -16,6 +16,9 @@ all			:	$(NAME)
 
 $(NAME)		:	$(OBJS) $(HEADER)
 				$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+val			:
+				valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes  ./philo 1 4 5 6 7
 
 clean		:
 				rm -rf $(OBJS)

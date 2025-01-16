@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/16 18:22:02 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:22:47 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ typedef struct s_philosophers
 // Utils
 int								argcheck(char *argv[]);
 int								ft_atoi(const char *nptr);
+int								free_all(t_data **data);
 
 // Init
-int								init(char **argv, t_data *data);
+int								init(char **argv, t_data **data);
 
 #endif
