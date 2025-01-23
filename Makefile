@@ -9,6 +9,8 @@ CFLAGS		=	-Werror -Wall -Wextra -g -I $(HEADER) -pthread
 SRCS		=	src/main.c \
 				src/init.c \
 				src/utils.c \
+				src/free.c \
+				src/error.c \
 
 OBJS		=	$(SRCS:.c=.o)
 

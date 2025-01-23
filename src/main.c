@@ -6,25 +6,24 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:29:34 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/23 14:37:28 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:01:29 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 	t_input	input;
+
 	if (!numbercheck(argv, argc) || !inputload(argv, &input, argc))
 		return (EXIT_FAILURE);
-	if (!init(argv, &data, &input))
+	if (init_data(&data, &input))
 		return (EXIT_FAILURE);
 	free_all(&data);
 	return (EXIT_SUCCESS);
 }
-
-
 
 // number of philosophers
 // time to die
