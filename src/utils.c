@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:03:30 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/22 17:07:45 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:16:39 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_isdigit(int c)
 	return (0);
 }
 
-int	argcheck(char *argv[], int argc)
+int	numbercheck(char *argv[], int argc)
 {
 	int	i;
 	int	j;
@@ -70,4 +70,24 @@ int	argcheck(char *argv[], int argc)
 		i++;
 	}
 	return (1);
+}
+
+int	inputload(char **argv, t_input *input, int argc)
+{
+	input->number_of_philos = ft_atoi(argv[1]);
+	input->time_to_die = ft_atoi(argv[2]);
+	input->time_to_eat = ft_atoi(argv[3]);
+	input->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		input->meals_required = ft_atoi(argv[5]);
+	else
+		input->meals_required = -1;
+	if (input->number_of_philos < 1 || input->number_of_philos > 200
+		|| input->time_to_die <= 0 || input->time_to_eat <= 0
+		|| input->meals_required <= -2)
+		{
+			printf("Error\n The input arguments are invalid");
+			return (0);
+		}
+		return (1);
 }

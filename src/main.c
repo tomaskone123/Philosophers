@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:29:34 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/22 17:05:20 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:08:11 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int main(int argc, char **argv)
 {
-	t_data	*data;
-
-	if (!argcheck(argv, argc))
-		return (1);
+	t_data	data;
+	t_input	input;
+	if (!numbercheck(argv, argc) || !inputload(argv, &input, argc))
+		return (EXIT_FAILURE);
 	if (!init(argv, &data))
-		return (1);
+		return (EXIT_FAILURE);
 	free_all(&data);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 
