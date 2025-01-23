@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/23 13:16:54 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:37:40 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int								free_all(t_data *data);
 int								inputload(char **argv, t_input *input, int argc);
 
 // Init
-int								init(char **argv, t_data *data);
+int								init(char **argv, t_data *data, t_input *input);
 
 #endif

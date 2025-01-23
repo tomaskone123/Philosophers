@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 17:29:34 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/23 14:37:28 by tkonecny         ###   ########.fr       */
+/*   Created: 2025/01/23 14:48:08 by tkonecny          #+#    #+#             */
+/*   Updated: 2025/01/23 14:48:58 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int main(int argc, char **argv)
+int error(int msg, t_data *data)
 {
-	t_data	data;
-	t_input	input;
-	if (!numbercheck(argv, argc) || !inputload(argv, &input, argc))
-		return (EXIT_FAILURE);
-	if (!init(argv, &data, &input))
-		return (EXIT_FAILURE);
-	free_all(&data);
-	return (EXIT_SUCCESS);
+	if 
 }
-
-
-
-// number of philosophers
-// time to die
-// time to eat
-// time to sleap
-// *Number of how many times each philosopher needs to eat
