@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/23 15:53:24 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:03:41 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
 
 # define ERROR 1
 # define SUCCESS 0
@@ -39,6 +41,7 @@ typedef struct s_input
 	int							time_to_eat;
 	int							time_to_sleep;
 	int							meals_required;
+	unsigned long				start_time;
 }								t_input;
 
 typedef struct s_data
@@ -67,11 +70,15 @@ int								ft_atoi(const char *nptr);
 void							free_all(t_data *data);
 int								inputload(char **argv, t_input *input,
 									int argc);
-
+unsigned long					get_time_in_ms(void);
 // Init
 int								init_data(t_data *data, t_input *input);
+int								init_thread(t_data *data);
 
 // Error
 int								error(int msg, t_data *data);
+
+// Simulation
+void								philo_lifecycle(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:03:30 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/23 13:16:39 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:34:23 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_atoi(const char *nptr)
 
 static int	ft_isdigit(int c)
 {
-	if ((c >= '0' && c <= '9'))
+	if ((c >= '0' && c <= '9') || c == '-' || c == '+')
 		return (1);
 	return (0);
 }
@@ -55,7 +55,7 @@ int	numbercheck(char *argv[], int argc)
 		printf("Error\n./philo [n-philos] [t-die] [t-eat] [t-sleep] *[n-eat]");
 		return (0);
 	}
-	while (argv[i])
+ 	while (argv[i])
 	{
 		j = 0;
 		while (argv[i][j])
@@ -90,4 +90,11 @@ int	inputload(char **argv, t_input *input, int argc)
 			return (0);
 		}
 		return (1);
+}
+
+unsigned long get_time_in_ms(void)
+{
+	struct timeval time;
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
