@@ -11,6 +11,8 @@ SRCS		=	src/main.c \
 				src/utils.c \
 				src/free.c \
 				src/error.c \
+				src/simulation.c \
+				src/actions.c \
 
 OBJS		=	$(SRCS:.c=.o)
 

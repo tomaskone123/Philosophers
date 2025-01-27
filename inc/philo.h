@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/24 15:03:41 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:00:24 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ int								init_thread(t_data *data);
 int								error(int msg, t_data *data);
 
 // Simulation
-void								philo_lifecycle(t_data *data);
+void							*philo_lifecycle(void *data);
 
 #endif
