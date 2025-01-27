@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/27 16:44:05 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:49:35 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_philos(t_data *data, int n_of_philos)
 			return (error(INCORRECT_MALLOC, data));
 		data->philos[i]->id = i;
 		data->philos[i]->meals_eaten = 0;
-		data->philos[i]->lasr_meal_time = 0;
+		data->philos[i]->last_meal_time = 0;
 		data->philos[i]->data = data;
 		if (pthread_mutex_init(&data->philos[i]->meal_lock, NULL))
 			return (error(INCORRECT_MUTEX, data));
