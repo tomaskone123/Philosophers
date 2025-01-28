@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:03:30 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/24 14:34:23 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:18:54 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	numbercheck(char *argv[], int argc)
 
 int	inputload(char **argv, t_input *input, int argc)
 {
+	input->start_time = 0;
 	input->number_of_philos = ft_atoi(argv[1]);
 	input->time_to_die = ft_atoi(argv[2]);
 	input->time_to_eat = ft_atoi(argv[3]);

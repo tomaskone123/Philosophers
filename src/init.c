@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/27 18:49:35 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:07:44 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ int	init_thread(t_data *data)
 	int	i;
 
 	i = 0;
-	data->input->start_time = get_time_in_ms();
 	while (i < data->input->number_of_philos)
 	{
-		if (pthread_create(&data->philos[i]->thread, NULL, &philo_lifecycle, data->philos[i]))
+		if (pthread_create(&data->philos[i]->thread, NULL, &philo_lifecycle,
+				data->philos[i]))
 			return (error(INCORRECT_THREAD, data));
 		i++;
 	}

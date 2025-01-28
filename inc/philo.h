@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/27 16:49:03 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:08:38 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_data
 	pthread_mutex_t				print_lock;
 	int							is_running;
 	t_philosophers				**philos;
+	pthread_t					monitor;
 }								t_data;
 
 typedef struct s_philosophers
