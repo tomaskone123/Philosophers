@@ -13,6 +13,8 @@ SRCS		=	src/main.c \
 				src/error.c \
 				src/simulation.c \
 				src/actions.c \
+				src/monitor.c \
+
 
 OBJS		=	$(SRCS:.c=.o)
 

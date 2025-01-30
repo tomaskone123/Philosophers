@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/28 17:07:44 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:38:27 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	init_mutex(t_data *data, int n_of_philos)
 	data->forks = malloc(sizeof(pthread_mutex_t) * n_of_philos);
 	if (!data->forks)
 		return (error(INCORRECT_MALLOC, NULL));
+	if (pthread_mutex_init(&data->simulation_lock, NULL))
+		return (error(INCORRECT_MUTEX, NULL));
 	while (i < n_of_philos)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL))
@@ -77,5 +79,7 @@ int	init_thread(t_data *data)
 			return (error(INCORRECT_THREAD, data));
 		i++;
 	}
+	if (pthread_create(&data->monitor, NULL, &monitor, data))
+		return (error(INCORRECT_THREAD, data));
 	return (SUCCESS);
 }
