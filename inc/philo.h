@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/30 14:52:22 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:04:16 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ void							free_all(t_data *data);
 int								inputload(char **argv, t_input *input,
 									int argc);
 unsigned long					get_time_in_ms(void);
+void							print_actions(t_philosophers *philo,
+									char *action);
+void							better_sleeps(unsigned long time_in_ms);
+
 // Init
 int								init_data(t_data *data, t_input *input);
 int								init_thread(t_data *data);
