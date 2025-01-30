@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/30 14:37:55 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:52:22 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ void							*philo_lifecycle(void *data);
 void							*monitor(void *arg);
 
 // Actions
-int	put_fork(t_philosophers *philo);
-int	eat(t_philosophers *philo);
-int	take_fork(t_philosophers *philo);
-int	think(t_philosophers *philo);
-int	sleeps(t_philosophers *philo);
+void							put_fork(t_philosophers *philo);
+void							eat(t_philosophers *philo);
+void							take_fork(t_philosophers *philo);
+void							think(t_philosophers *philo);
+void							sleeps(t_philosophers *philo);
 
 #endif

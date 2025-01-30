@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:29:34 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/27 16:44:38 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:47:19 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (init_thread(&data))
 		return (EXIT_FAILURE);
-	
 	free_all(&data);
 	return (EXIT_SUCCESS);
 }
