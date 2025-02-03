@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/03 12:36:58 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:48:55 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*philo_lifecycle(void *arg)
 	t_philosophers	*philo;
 
 	philo = (t_philosophers *)arg;
+	philo->data->forks[0] = philo->data->forks[philo->id % philo->input->number_of_philos];
+	philo->data->forks[1] = philo->data->forks[philo->id - 1];
 	if (philo->input->meals_required == 0)
 		return (NULL);
 	if (philo->input->start_time == 0)
@@ -53,7 +55,7 @@ void	*monitor(void *arg)
 			data->is_running = 0;
 			pthread_mutex_unlock(&data->simulation_lock);
 			i++;
-			pritnt_status(data->philos[i], "died"); // TO DO
+			pritnt_status(data->philos[i], " died");
 			pthread_mutex_unlock(&data->philos[i]->meal_lock);
 		}
 		usleep(1000);

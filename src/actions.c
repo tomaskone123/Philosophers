@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/03 12:39:27 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:47:56 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@ void	eat(t_philosophers *philo)
 }
 void	think(t_philosophers *philo)
 {
+	print_action(philo, "is thinking");
+	usleep(philo->input->time_to_sleep);
 }
 
 void	take_fork(t_philosophers *philo)
 {
+	
+	
 }
 
 void	put_fork(t_philosophers *philo)
