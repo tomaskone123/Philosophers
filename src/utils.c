@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:03:30 by tomas             #+#    #+#             */
-/*   Updated: 2025/01/30 14:47:35 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:30:35 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	numbercheck(char *argv[], int argc)
 	if (argc < 5 || argc > 6)
 	{
 		printf("Error\n./philo [n-philos] [t-die] [t-eat] [t-sleep] *[n-eat]");
-		return (0);
+		return (ERROR);
 	}
 	while (argv[i])
 	{
@@ -63,13 +63,13 @@ int	numbercheck(char *argv[], int argc)
 			if (!ft_isdigit(argv[i][j]))
 			{
 				printf("Error\nOne of the inputs wasn't a number");
-				return (0);
+				return (ERROR);
 			}
 			j++;
 		}
 		i++;
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 int	inputload(char **argv, t_input *input, int argc)
@@ -88,9 +88,9 @@ int	inputload(char **argv, t_input *input, int argc)
 		|| input->meals_required <= -2)
 	{
 		printf("Error\n The input arguments are invalid");
-		return (0);
+		return (ERROR);
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 unsigned long	get_time_in_ms(void)

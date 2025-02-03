@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/03 15:15:28 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:58:54 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	init_philos(t_data *data, int n_of_philos)
 		data->philos[i]->meals_eaten = 0;
 		data->philos[i]->last_meal_time = 0;
 		data->philos[i]->data = data;
+		data->philos[i]->input = data->input;
 		if (pthread_mutex_init(&data->philos[i]->meal_lock, NULL))
 			return (error(INCORRECT_MUTEX, data));
 		i++;
@@ -59,6 +60,7 @@ int	init_mutex(t_data *data, int n_of_philos)
 
 int	init_data(t_data *data, t_input *input)
 {
+	data->is_running = 1;
 	data->input = input;
 	if (init_mutex(data, input->number_of_philos))
 		return (ERROR);

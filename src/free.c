@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:49:26 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/30 14:38:48 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:57:16 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	free_mutex(t_data *data)
 	{
 		pthread_mutex_destroy(&data->philos[i]->meal_lock);
 		pthread_mutex_destroy(&data->forks[i]);
+		// free(&data->forks[i]);
 		i++;
 	}
-	free(data->forks);
+	// free(data->forks);
 	pthread_mutex_destroy(&data->simulation_lock);
 	pthread_mutex_destroy(&data->print_lock);
 }

@@ -23,7 +23,7 @@ $(NAME)		:	$(OBJS) $(HEADER)
 				$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 val			:
-				valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes  ./philo 1 4 5 6 7
+				valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes  ./philo 5 200 200 200 200
 
 clean		:
 				rm -rf $(OBJS)
