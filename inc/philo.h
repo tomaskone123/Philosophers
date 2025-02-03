@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/03 12:37:11 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:00:39 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ typedef enum e_msg
 typedef struct s_input
 {
 	int							number_of_philos;
-	int							time_to_die;
-	int							time_to_eat;
-	int							time_to_sleep;
+	size_t						time_to_die;
+	size_t						time_to_eat;
+	size_t						time_to_sleep;
 	int							meals_required;
 	unsigned long				start_time;
 }								t_input;

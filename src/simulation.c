@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/03 12:48:55 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:59:50 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	*philo_lifecycle(void *arg)
 	t_philosophers	*philo;
 
 	philo = (t_philosophers *)arg;
-	philo->data->forks[0] = philo->data->forks[philo->id % philo->input->number_of_philos];
-	philo->data->forks[1] = philo->data->forks[philo->id - 1];
+	philo->data->forks[0] = philo->data->forks[philo->id
+		% philo->input->number_of_philos];
+	philo->data->forks[1] = philo->data->forks[(philo->id
+			+ philo->input->number_of_philos - 1)
+		% philo->input->number_of_philos];
 	if (philo->input->meals_required == 0)
 		return (NULL);
 	if (philo->input->start_time == 0)
@@ -26,10 +29,10 @@ void	*philo_lifecycle(void *arg)
 	while (1)
 	{
 		think(philo);
-		take_fork(philo);
+		// take_fork(philo);
 		eat(philo);
-		put_fork(philo);
-		sleeps(philo);
+		// put_fork(philo);
+		// sleeps(philo);
 		if (philo->input->meals_required > 0
 			&& philo->meals_eaten >= philo->input->meals_required)
 			return (NULL);
@@ -55,7 +58,7 @@ void	*monitor(void *arg)
 			data->is_running = 0;
 			pthread_mutex_unlock(&data->simulation_lock);
 			i++;
-			pritnt_status(data->philos[i], " died");
+			print_action(data->philos[i], " died");
 			pthread_mutex_unlock(&data->philos[i]->meal_lock);
 		}
 		usleep(1000);
