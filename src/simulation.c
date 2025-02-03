@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/30 14:55:00 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:36:58 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,12 @@ void	*monitor(void *arg)
 		usleep(1000);
 	}
 	return (NULL);
+}
+
+void	print_action(t_philosophers *philo, char *action)
+{
+	pthread_mutex_lock(&philo->data->print_lock);
+	printf("%lu %d %s\n", get_time_in_ms() - philo->data->input->start_time,
+		philo->id, action);
+	pthread_mutex_unlock(&philo->data->print_lock);
 }

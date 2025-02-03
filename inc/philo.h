@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/30 15:04:16 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:37:11 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ unsigned long					get_time_in_ms(void);
 void							print_actions(t_philosophers *philo,
 									char *action);
 void							better_sleeps(unsigned long time_in_ms);
+void							print_action(t_philosophers *philo,
+									char *action);
 
 // Init
 int								init_data(t_data *data, t_input *input);
