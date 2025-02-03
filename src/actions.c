@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/03 13:58:40 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:21:57 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,22 @@ void	think(t_philosophers *philo)
 	usleep(philo->input->time_to_sleep);
 }
 
-// void	take_fork(t_philosophers *philo)
-// {
-	
-	
-// }
+void	take_fork(t_philosophers *philo)
+{
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(&philo->data->forks[0]);
+		pthread_mutex_lock(&philo->data->forks[1]);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->data->forks[1]);
+		pthread_mutex_lock(&philo->data->forks[0]);
+	}
+}
 
-// void	put_fork(t_philosophers *philo)
-// {
-// }
-
-// void	sleeps(t_philosophers *philo)
-// {
-// }
+void	put_fork(t_philosophers *philo)
+{
+	pthread_mutex_unlock(&philo->data->forks[0]);
+	pthread_mutex_unlock(&philo->data->forks[1]);
+}

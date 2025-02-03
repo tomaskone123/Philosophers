@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/03 13:59:50 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:22:23 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	*philo_lifecycle(void *arg)
 	while (1)
 	{
 		think(philo);
-		// take_fork(philo);
+		take_fork(philo);
 		eat(philo);
-		// put_fork(philo);
-		// sleeps(philo);
+		put_fork(philo);
+		usleep(philo->input->time_to_sleep);
 		if (philo->input->meals_required > 0
 			&& philo->meals_eaten >= philo->input->meals_required)
 			return (NULL);
