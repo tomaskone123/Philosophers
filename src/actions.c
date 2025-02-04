@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/03 16:42:15 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:50:09 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	eat(t_philosophers *philo)
 {
+	if (!philo->data->is_running)
+		return ;
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->last_meal_time = get_time_in_ms();
 	philo->meals_eaten++;
@@ -23,6 +25,8 @@ void	eat(t_philosophers *philo)
 }
 void	think(t_philosophers *philo)
 {
+	if (!philo->data->is_running)
+		return ;
 	print_action(philo, "is thinking");
 	usleep(1000);
 }
@@ -33,6 +37,11 @@ void	take_fork(t_philosophers *philo)
 	{
 		pthread_mutex_lock(&philo->data->forks[0]);
 		print_action(philo, "has taken a fork");
+		if (!philo->data->is_running)
+		{
+			pthread_mutex_unlock(&philo->data->forks[0]);
+			return ;
+		}	
 		pthread_mutex_lock(&philo->data->forks[1]);
 		print_action(philo, "has taken a fork");
 	}
@@ -40,6 +49,11 @@ void	take_fork(t_philosophers *philo)
 	{
 		pthread_mutex_lock(&philo->data->forks[1]);
 		print_action(philo, "has taken a fork");
+		if (!philo->data->is_running)
+		{
+			pthread_mutex_unlock(&philo->data->forks[1]);
+			return ;
+		}	
 		pthread_mutex_lock(&philo->data->forks[0]);
 		print_action(philo, "has taken a fork");
 	}
@@ -54,6 +68,8 @@ void	put_fork(t_philosophers *philo)
 
 void	sleeps(t_philosophers *philo)
 {
+	if (!philo->data->is_running)
+		return ;
 	print_action(philo, "is sleeping");
 	usleep(philo->input->time_to_sleep);
 }

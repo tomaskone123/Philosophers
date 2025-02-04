@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/03 17:16:27 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:58:51 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,20 @@ void	*philo_lifecycle(void *arg)
 		return (NULL);
 	if (philo->data->input->number_of_philos == 1)
 		only_one_philo(philo);
-	while (philo->data->is_running)
+	if (philo->id % 2 == 0)
+		usleep(100);
+	while (1 && philo->data->is_running)
 	{
-		think(philo);
-		take_fork(philo);
-		eat(philo);
-		put_fork(philo);
-		sleeps(philo);
+		if (philo->data->is_running)
+			think(philo);
+		if (philo->data->is_running)
+			take_fork(philo);
+		if (philo->data->is_running)
+			eat(philo);
+		if (philo->data->is_running)
+			put_fork(philo);
+		if (philo->data->is_running)
+			sleeps(philo);
 		if (philo->input->meals_required > 0
 			&& philo->meals_eaten >= philo->input->meals_required)
 			return (NULL);
