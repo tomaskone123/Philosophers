@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:49:37 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 19:13:27 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:57:00 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 void	*stopprocess(t_data *data, int i)
 {
+	int	j;
+
+	j = 0;
 	if (data->philos[i]->meals_eaten == data->input->meals_required)
 		print_action(data->philos[i], "has eaten enough");
 	else

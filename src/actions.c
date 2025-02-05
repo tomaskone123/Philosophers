@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 18:24:41 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:06:14 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	eat(t_philosophers *philo)
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->meal_lock);
 	print_action(philo, "is eating");
-	usleep(philo->input->time_to_eat * 1000);
+	delay(philo->input->time_to_eat);
 }
 
 void	think(t_philosophers *philo)
@@ -68,8 +68,21 @@ void	take_fork(t_philosophers *philo)
 
 void	put_fork(t_philosophers *philo)
 {
-	pthread_mutex_unlock(&philo->data->forks[0]);
-	pthread_mutex_unlock(&philo->data->forks[1]);
+	int	first_fork;
+	int	second_fork;
+
+	if (philo->id % 2 == 0)
+	{
+		first_fork = philo->id - 1;
+		second_fork = (philo->id) % philo->input->number_of_philos;
+	}
+	else
+	{
+		second_fork = philo->id - 1;
+		first_fork = (philo->id) % philo->input->number_of_philos;
+	}
+	pthread_mutex_unlock(&philo->data->forks[first_fork]);
+	pthread_mutex_unlock(&philo->data->forks[second_fork]);
 }
 
 void	sleeps(t_philosophers *philo)
@@ -82,5 +95,5 @@ void	sleeps(t_philosophers *philo)
 	}
 	pthread_mutex_unlock(&philo->data->simulation_lock);
 	print_action(philo, "is sleeping");
-	usleep(philo->input->time_to_sleep * 1000);
+	delay(philo->input->time_to_sleep);
 }
