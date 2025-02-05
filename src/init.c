@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 14:11:13 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:57:06 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_philos(t_data *data, int n_of_philos)
 	int	i;
 
 	i = 0;
-	data->philos = malloc(sizeof(t_philosophers) * n_of_philos);
+	data->philos = malloc(sizeof(t_philosophers *) * n_of_philos);
 	if (!data->philos)
 		return (error(INCORRECT_MALLOC, NULL));
 	while (i < n_of_philos)
@@ -27,15 +27,11 @@ int	init_philos(t_data *data, int n_of_philos)
 			return (error(INCORRECT_MALLOC, data));
 		data->philos[i]->id = i + 1;
 		data->philos[i]->meals_eaten = 0;
-		data->philos[i]->last_meal_time = get_time_in_ms();
+		data->philos[i]->last_meal_time = 0;
 		data->philos[i]->data = data;
+		data->philos[i]->input = data->input;
 		if (pthread_mutex_init(&data->philos[i]->meal_lock, NULL))
-		{
-			while (--i >= 0)
-				pthread_mutex_destroy(&data->philos[i]->meal_lock);
-			free(data->philos);
 			return (error(INCORRECT_MUTEX, data));
-		}
 		i++;
 	}
 	return (SUCCESS);
@@ -56,14 +52,7 @@ int	init_mutex(t_data *data, int n_of_philos)
 	while (i < n_of_philos)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL))
-		{
-			while (--i >= 0)
-				pthread_mutex_destroy(&data->forks[i]);
-			pthread_mutex_destroy(&data->print_lock);
-			pthread_mutex_destroy(&data->simulation_lock);
-			free(data->forks);
 			return (error(INCORRECT_MUTEX, NULL));
-		}
 		i++;
 	}
 	return (SUCCESS);
@@ -73,14 +62,10 @@ int	init_data(t_data *data, t_input *input)
 {
 	data->is_running = 1;
 	data->input = input;
-	data->input->start_time = 0;
 	if (init_mutex(data, input->number_of_philos))
 		return (ERROR);
 	if (init_philos(data, input->number_of_philos))
-	{
-		free_mutex(data);
 		return (ERROR);
-	}
 	return (SUCCESS);
 }
 
@@ -92,19 +77,11 @@ int	init_thread(t_data *data)
 	while (i < data->input->number_of_philos)
 	{
 		if (pthread_create(&data->philos[i]->thread, NULL, &philo_lifecycle,
-				&data->philos[i]))
-			{
-				while (--i >= 0)
-					pthread_join(data->philos[i]->thread, NULL);
-				return (error(INCORRECT_THREAD, data));
-			}
+				data->philos[i]))
+			return (error(INCORRECT_THREAD, data));
 		i++;
 	}
 	if (pthread_create(&data->monitor, NULL, &monitor, data))
-	{
-		while (--i >= 0)
-			pthread_join(data->philos[i]->thread, NULL);
 		return (error(INCORRECT_THREAD, data));
-	}
 	return (SUCCESS);
 }
