@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 13:57:06 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:10:52 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	init_philos(t_data *data, int n_of_philos)
 	data->philos = malloc(sizeof(t_philosophers *) * n_of_philos);
 	if (!data->philos)
 		return (error(INCORRECT_MALLOC, NULL));
+	data->input->start_time = get_time_in_ms();
 	while (i < n_of_philos)
 	{
 		data->philos[i] = malloc(sizeof(t_philosophers));

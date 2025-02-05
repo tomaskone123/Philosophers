@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 15:26:30 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:03:09 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 static void	*only_one_philo(t_philosophers *philo)
 {
 	print_action(philo, "has taken a fork");
-	usleep(philo->input->time_to_die);
+	usleep(philo->input->time_to_die * 1000);
+	philo->last_meal_time = get_time_in_ms();
+	philo->meals_eaten++;
 	return (NULL);
 }
 
@@ -24,14 +26,12 @@ void	*philo_lifecycle(void *arg)
 	t_philosophers	*philo;
 
 	philo = (t_philosophers *)arg;
-	if (philo->input->start_time == 0)
-		philo->input->start_time = get_time_in_ms();
 	if (philo->input->meals_required == 0)
 		return (NULL);
 	if (philo->data->input->number_of_philos == 1)
 		return (only_one_philo(philo));
 	if (philo->id % 2 == 0)
-		usleep(philo->input->time_to_eat);
+		usleep(philo->input->time_to_eat * 1000);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->data->simulation_lock);
@@ -94,7 +94,8 @@ void	print_action(t_philosophers *philo, char *action)
 	}
 	pthread_mutex_unlock(&philo->data->simulation_lock);
 	pthread_mutex_lock(&philo->data->print_lock);
-	printf("%lu %d %s\n", get_time_in_ms() - philo->data->input->start_time,
+	printf("%lu\t %d %s\n", get_time_in_ms() - philo->data->input->start_time,
 		philo->id, action);
+	printf("id:\t\t%d\nmeal_eaten:\t%d\n", philo->id, philo->meals_eaten);
 	pthread_mutex_unlock(&philo->data->print_lock);
 }
