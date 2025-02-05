@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 18:15:49 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:16:00 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*philo_lifecycle(void *arg)
 			return (NULL);
 	}
 	return (NULL);
-
+}
 
 void	*monitor(void *arg)
 {
