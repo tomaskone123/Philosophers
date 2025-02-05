@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 17:49:49 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:09:42 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	eat(t_philosophers *philo)
 	usleep(philo->input->time_to_eat * 1000);
 	print_action(philo, "is eating");
 }
+
 void	think(t_philosophers *philo)
 {
 	pthread_mutex_lock(&philo->data->simulation_lock);
@@ -63,7 +64,6 @@ void	take_fork(t_philosophers *philo)
 	print_action(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->data->forks[second_fork]);
 	print_action(philo, "has taken a fork");
-
 }
 
 void	put_fork(t_philosophers *philo)
