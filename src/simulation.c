@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 13:14:42 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:52:49 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*philo_lifecycle(void *arg)
 	if (philo->data->input->number_of_philos == 1)
 		return (only_one_philo(philo));
 	if (philo->id % 2 == 0)
-		usleep(philo->data->input->time_to_die / 2);
+		usleep(philo->input->time_to_eat);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->data->simulation_lock);
@@ -73,12 +73,13 @@ void	*monitor(void *arg)
 				pthread_mutex_lock(&data->simulation_lock);
 				data->is_running = 0;
 				pthread_mutex_unlock(&data->simulation_lock);
+				pthread_mutex_unlock(&data->philos[i]->meal_lock);
 				return (NULL);
 			}
 			pthread_mutex_unlock(&data->philos[i]->meal_lock);
 			i++;
 		}
-		usleep(1000);
+		// usleep(500);
 	}
 	return (NULL);
 }
