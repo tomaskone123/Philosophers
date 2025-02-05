@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:49:37 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 19:57:00 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:09:29 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 void	*stopprocess(t_data *data, int i)
 {
-	int	j;
-
-	j = 0;
 	if (data->philos[i]->meals_eaten == data->input->meals_required)
 		print_action(data->philos[i], "has eaten enough");
 	else
@@ -43,4 +40,16 @@ void	*stopprocess(t_data *data, int i)
 	pthread_mutex_unlock(&data->simulation_lock);
 	pthread_mutex_unlock(&data->philos[i]->meal_lock);
 	return (NULL);
+}
+
+int	check_running(t_philosophers *philo)
+{
+	pthread_mutex_lock(&philo->data->simulation_lock);
+	if (!philo->data->is_running)
+	{
+		pthread_mutex_unlock(&philo->data->simulation_lock);
+		return (0);
+	}
+	pthread_mutex_unlock(&philo->data->simulation_lock);
+	return (1);
 }

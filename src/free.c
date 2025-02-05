@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:49:26 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 15:17:45 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:09:59 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_all(t_data *data)
 
 	i = 0;
 	free_mutex(data);
-	join_threads(data);
+	// join_threads(data);
 	while (i < data->input->number_of_philos)
 	{
 		free(data->philos[i]);

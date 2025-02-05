@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:48:08 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/01/30 14:47:44 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 21:21:53 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ int	error(int msg, t_data *data)
 		printf("Error\nMutex failed\n");
 	else if (msg == INCORRECT_THREAD)
 		printf("Error\nThread failed\n");
+	else if (msg == JOIN_ERROR)
+		printf("Error\nJoin_Error");
 	return (ERROR);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 20:06:14 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 21:24:14 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	eat(t_philosophers *philo)
 {
-	pthread_mutex_lock(&philo->data->simulation_lock);
-	if (!philo->data->is_running)
+	if (!check_running(philo))
 		return ;
-	pthread_mutex_unlock(&philo->data->simulation_lock);
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->last_meal_time = get_time_in_ms();
 	philo->meals_eaten++;
@@ -28,13 +26,8 @@ void	eat(t_philosophers *philo)
 
 void	think(t_philosophers *philo)
 {
-	pthread_mutex_lock(&philo->data->simulation_lock);
-	if (!philo->data->is_running)
-	{
-		pthread_mutex_unlock(&philo->data->simulation_lock);
+	if (!check_running(philo))
 		return ;
-	}
-	pthread_mutex_unlock(&philo->data->simulation_lock);
 	print_action(philo, "is thinking");
 }
 
@@ -53,13 +46,8 @@ void	take_fork(t_philosophers *philo)
 		second_fork = philo->id - 1;
 		first_fork = (philo->id) % philo->input->number_of_philos;
 	}
-	pthread_mutex_lock(&philo->data->simulation_lock);
-	if (!philo->data->is_running)
-	{
-		pthread_mutex_unlock(&philo->data->simulation_lock);
+	if (!check_running(philo))
 		return ;
-	}
-	pthread_mutex_unlock(&philo->data->simulation_lock);
 	pthread_mutex_lock(&philo->data->forks[first_fork]);
 	print_action(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->data->forks[second_fork]);
@@ -87,13 +75,8 @@ void	put_fork(t_philosophers *philo)
 
 void	sleeps(t_philosophers *philo)
 {
-	pthread_mutex_lock(&philo->data->simulation_lock);
-	if (!philo->data->is_running)
-	{
-		pthread_mutex_unlock(&philo->data->simulation_lock);
+	if (!check_running(philo))
 		return ;
-	}
-	pthread_mutex_unlock(&philo->data->simulation_lock);
 	print_action(philo, "is sleeping");
 	delay(philo->input->time_to_sleep);
 }

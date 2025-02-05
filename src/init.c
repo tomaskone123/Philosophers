@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 18:49:18 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:09:46 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	init_thread(t_data *data)
 	int	i;
 
 	i = 0;
+	if (pthread_create(&data->monitor, NULL, &monitor, data))
+		return (error(INCORRECT_THREAD, data));
 	while (i < data->input->number_of_philos)
 	{
 		if (pthread_create(&data->philos[i]->thread, NULL, &philo_lifecycle,
@@ -83,7 +85,13 @@ int	init_thread(t_data *data)
 			return (error(INCORRECT_THREAD, data));
 		i++;
 	}
-	if (pthread_create(&data->monitor, NULL, &monitor, data))
-		return (error(INCORRECT_THREAD, data));
+	i = 0;
+	while (i < data->input->number_of_philos)
+	{
+		if (pthread_join(data->philos[i]->thread, NULL))
+			return (error(JOIN_ERROR, data));
+	}
+	if (pthread_join(data->monitor, NULL))
+		return (error(JOIN_ERROR, data));
 	return (SUCCESS);
 }

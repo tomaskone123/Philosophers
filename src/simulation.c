@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 19:37:31 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:09:37 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,16 @@ void	*philo_lifecycle(void *arg)
 	}
 	while (1)
 	{
-		pthread_mutex_lock(&philo->data->simulation_lock);
-		if (!philo->data->is_running)
-		{
-			pthread_mutex_unlock(&philo->data->simulation_lock);
+		if (!check_running(philo))
 			return (NULL);
-		}
-		pthread_mutex_unlock(&philo->data->simulation_lock);
+ 		if (philo->input->meals_required > 0
+			&& philo->meals_eaten >= philo->input->meals_required)
+			return (NULL);
 		think(philo);
 		take_fork(philo);
 		eat(philo);
 		put_fork(philo);
 		sleeps(philo);
-		if (philo->input->meals_required > 0
-			&& philo->meals_eaten >= philo->input->meals_required)
-			return (NULL);
 	}
 	return (NULL);
 }
@@ -82,13 +77,8 @@ void	*monitor(void *arg)
 
 void	print_action(t_philosophers *philo, char *action)
 {
-	pthread_mutex_lock(&philo->data->simulation_lock);
-	if (!philo->data->is_running)
-	{
-		pthread_mutex_unlock(&philo->data->simulation_lock);
+	if (!check_running(philo))
 		return ;
-	}
-	pthread_mutex_unlock(&philo->data->simulation_lock);
 	pthread_mutex_lock(&philo->data->print_lock);
 	if (ft_strncmp(action, "has eaten enough", 16) == 0)
 		printf("\tall meals eaten\n");
@@ -96,13 +86,14 @@ void	print_action(t_philosophers *philo, char *action)
 		printf("%lu\t%d %s\n", get_time_in_ms()
 			- philo->data->input->start_time, philo->id, action);
 	// printf("id:\t\t%d\nmeal_eaten:\t%d\n", philo->id, philo->meals_eaten);
+	// printf("%d\n", philo->input->number_of_philos);
 	pthread_mutex_unlock(&philo->data->print_lock);
 }
 
 void	delay(int delayed_time)
 {
 	unsigned long	start_time;
-	
+
 	start_time = get_time_in_ms();
 	while (get_time_in_ms() - start_time < (unsigned long) delayed_time)
 		usleep(1);
