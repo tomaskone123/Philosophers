@@ -37,9 +37,9 @@ git:
 		echo "Error: You must provide a commit message."; \
 		exit 1; \
 	fi; \
-	git add -A; \
-	git commit -m "$$msg"; \
-	git push
+	git add . > /dev/null 2>&1; \
+	git commit -m "$$msg" > /dev/null 2>&1; \
+	git push > /dev/null 2>&1; \
 	echo "Last commit:"; \
 	git log -1
 
