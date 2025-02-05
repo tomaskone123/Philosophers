@@ -31,7 +31,7 @@ clean		:
 fclean		:	clean
 				rm -rf $(NAME)
 
-git:
+git			:	fclean
 	@msg="$(wordlist 2,999,$(MAKECMDGOALS))"; \
 	if [ -z "$$msg" ]; then \
 		echo "Error: You must provide a commit message."; \
