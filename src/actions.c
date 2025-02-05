@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 18:09:42 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:24:41 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	eat(t_philosophers *philo)
 	philo->last_meal_time = get_time_in_ms();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->meal_lock);
-	usleep(philo->input->time_to_eat * 1000);
 	print_action(philo, "is eating");
+	usleep(philo->input->time_to_eat * 1000);
 }
 
 void	think(t_philosophers *philo)
@@ -81,6 +81,6 @@ void	sleeps(t_philosophers *philo)
 		return ;
 	}
 	pthread_mutex_unlock(&philo->data->simulation_lock);
-	usleep(philo->input->time_to_sleep * 1000);
 	print_action(philo, "is sleeping");
+	usleep(philo->input->time_to_sleep * 1000);
 }

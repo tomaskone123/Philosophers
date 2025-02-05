@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/03 16:04:32 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:07:07 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_data
 	t_philosophers				**philos;
 	pthread_t					monitor;
 	t_input						*input;
+	int							all_meals_eaten;
 	int							is_running;
 }								t_data;
 
@@ -78,6 +79,9 @@ void							print_actions(t_philosophers *philo,
 void							better_sleeps(unsigned long time_in_ms);
 void							print_action(t_philosophers *philo,
 									char *action);
+void							*stopprocess(t_data *data, int i);
+int								ft_strncmp(const char *s1, const char *s2,
+									size_t n);
 
 // Init
 int								init_data(t_data *data, t_input *input);

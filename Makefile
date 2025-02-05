@@ -12,6 +12,7 @@ SRCS		=	src/main.c \
 				src/free.c \
 				src/error.c \
 				src/simulation.c \
+				src/utils2.c \
 				src/actions.c \
 
 

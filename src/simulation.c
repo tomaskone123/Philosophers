@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 18:17:16 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:09:34 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	*only_one_philo(t_philosophers *philo)
 {
 	print_action(philo, "has taken a fork");
-	usleep(philo->input->time_to_die * 1000);
+	usleep(philo->input->time_to_die);
 	philo->last_meal_time = get_time_in_ms();
 	philo->meals_eaten++;
 	return (NULL);
@@ -68,18 +68,11 @@ void	*monitor(void *arg)
 			pthread_mutex_lock(&data->philos[i]->meal_lock);
 			if (data->philos[i]->last_meal_time > 0 && get_time_in_ms()
 				- data->philos[i]->last_meal_time > data->input->time_to_die)
-			{
-				print_action(data->philos[i], "died");
-				pthread_mutex_lock(&data->simulation_lock);
-				data->is_running = 0;
-				pthread_mutex_unlock(&data->simulation_lock);
-				pthread_mutex_unlock(&data->philos[i]->meal_lock);
-				return (NULL);
-			}
+				return (stopprocess(data, i));
 			pthread_mutex_unlock(&data->philos[i]->meal_lock);
 			i++;
 		}
-		usleep(500);
+		usleep(1);
 	}
 	return (NULL);
 }
@@ -94,8 +87,12 @@ void	print_action(t_philosophers *philo, char *action)
 	}
 	pthread_mutex_unlock(&philo->data->simulation_lock);
 	pthread_mutex_lock(&philo->data->print_lock);
-	printf("%lu\t %d %s\n", get_time_in_ms() - philo->data->input->start_time,
-		philo->id, action);
+	if (ft_strncmp(action, "has eaten enough", 16) == 0)
+		printf("\tall meals eaten\n");
+	else
+		printf("%lu\t%d id:%d %s\n", get_time_in_ms()
+			- philo->data->input->start_time, philo->meals_eaten, philo->id,
+			action);
 	// printf("id:\t\t%d\nmeal_eaten:\t%d\n", philo->id, philo->meals_eaten);
 	pthread_mutex_unlock(&philo->data->print_lock);
 }
