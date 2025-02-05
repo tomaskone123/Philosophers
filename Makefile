@@ -2,7 +2,7 @@ NAME		=	philo
 
 HEADER		=	./inc
 
-CC			=	gcc
+CC			=	cc
 
 CFLAGS		=	-Werror -Wall -Wextra -g -I $(HEADER) -pthread
 

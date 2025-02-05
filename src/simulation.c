@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 13:52:49 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:26:30 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*philo_lifecycle(void *arg)
 			pthread_mutex_unlock(&philo->data->simulation_lock);
 			return (NULL);
 		}
-		pthread_mutex_unlock(&philo->data->simulation_lock);	
+		pthread_mutex_unlock(&philo->data->simulation_lock);
 		think(philo);
 		take_fork(philo);
 		eat(philo);
@@ -66,7 +66,7 @@ void	*monitor(void *arg)
 		while (i < data->input->number_of_philos)
 		{
 			pthread_mutex_lock(&data->philos[i]->meal_lock);
-			if (get_time_in_ms()
+			if (data->philos[i]->last_meal_time > 0 && get_time_in_ms()
 				- data->philos[i]->last_meal_time > data->input->time_to_die)
 			{
 				print_action(data->philos[i], "died");
@@ -79,7 +79,7 @@ void	*monitor(void *arg)
 			pthread_mutex_unlock(&data->philos[i]->meal_lock);
 			i++;
 		}
-		// usleep(500);
+		usleep(500);
 	}
 	return (NULL);
 }
@@ -94,7 +94,7 @@ void	print_action(t_philosophers *philo, char *action)
 	}
 	pthread_mutex_unlock(&philo->data->simulation_lock);
 	pthread_mutex_lock(&philo->data->print_lock);
-	printf("%lu %d %s\n", get_time_in_ms() - philo->data->input->start_time, 
+	printf("%lu %d %s\n", get_time_in_ms() - philo->data->input->start_time,
 		philo->id, action);
 	pthread_mutex_unlock(&philo->data->print_lock);
 }
