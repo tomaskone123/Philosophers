@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/04 15:58:51 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:14:42 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,23 @@ void	*philo_lifecycle(void *arg)
 	if (philo->input->meals_required == 0)
 		return (NULL);
 	if (philo->data->input->number_of_philos == 1)
-		only_one_philo(philo);
+		return (only_one_philo(philo));
 	if (philo->id % 2 == 0)
-		usleep(100);
-	while (1 && philo->data->is_running)
+		usleep(philo->data->input->time_to_die / 2);
+	while (1)
 	{
-		if (philo->data->is_running)
-			think(philo);
-		if (philo->data->is_running)
-			take_fork(philo);
-		if (philo->data->is_running)
-			eat(philo);
-		if (philo->data->is_running)
-			put_fork(philo);
-		if (philo->data->is_running)
-			sleeps(philo);
+		pthread_mutex_lock(&philo->data->simulation_lock);
+		if (!philo->data->is_running)
+		{
+			pthread_mutex_unlock(&philo->data->simulation_lock);
+			return (NULL);
+		}
+		pthread_mutex_unlock(&philo->data->simulation_lock);	
+		think(philo);
+		take_fork(philo);
+		eat(philo);
+		put_fork(philo);
+		sleeps(philo);
 		if (philo->input->meals_required > 0
 			&& philo->meals_eaten >= philo->input->meals_required)
 			return (NULL);
@@ -58,7 +60,7 @@ void	*monitor(void *arg)
 
 	i = 0;
 	data = (t_data *)arg;
-	while (data->is_running)
+	while (1)
 	{
 		i = 0;
 		while (i < data->input->number_of_philos)
@@ -83,6 +85,13 @@ void	*monitor(void *arg)
 
 void	print_action(t_philosophers *philo, char *action)
 {
+	pthread_mutex_lock(&philo->data->simulation_lock);
+	if (!philo->data->is_running)
+	{
+		pthread_mutex_unlock(&philo->data->simulation_lock);
+		return ;
+	}
+	pthread_mutex_unlock(&philo->data->simulation_lock);
 	pthread_mutex_lock(&philo->data->print_lock);
 	printf("%lu %d %s\n", get_time_in_ms() - philo->data->input->start_time, 
 		philo->id, action);
