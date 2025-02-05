@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 13:52:49 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:14:26 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	*philo_lifecycle(void *arg)
 	t_philosophers	*philo;
 
 	philo = (t_philosophers *)arg;
-	if (philo->input->start_time == 0)
+	printf("philo-id: %d\n", philo->id);
+	printf("philo-data: %p\n", philo->data);
+	printf("philo-data-input: %p\n", philo->data->input);
+	if (philo->data->input->start_time == 0)
 		philo->input->start_time = get_time_in_ms();
 	if (philo->input->meals_required == 0)
 		return (NULL);
@@ -40,7 +43,7 @@ void	*philo_lifecycle(void *arg)
 			pthread_mutex_unlock(&philo->data->simulation_lock);
 			return (NULL);
 		}
-		pthread_mutex_unlock(&philo->data->simulation_lock);	
+		pthread_mutex_unlock(&philo->data->simulation_lock);
 		think(philo);
 		take_fork(philo);
 		eat(philo);
@@ -94,7 +97,7 @@ void	print_action(t_philosophers *philo, char *action)
 	}
 	pthread_mutex_unlock(&philo->data->simulation_lock);
 	pthread_mutex_lock(&philo->data->print_lock);
-	printf("%lu %d %s\n", get_time_in_ms() - philo->data->input->start_time, 
+	printf("%lu %d %s\n", get_time_in_ms() - philo->data->input->start_time,
 		philo->id, action);
 	pthread_mutex_unlock(&philo->data->print_lock);
 }
