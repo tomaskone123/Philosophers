@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 19:07:07 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:28:14 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void							print_action(t_philosophers *philo,
 void							*stopprocess(t_data *data, int i);
 int								ft_strncmp(const char *s1, const char *s2,
 									size_t n);
+void							delay(int delayed_time);
 
 // Init
 int								init_data(t_data *data, t_input *input);

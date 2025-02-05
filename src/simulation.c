@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 19:09:34 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:28:38 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,17 @@ void	print_action(t_philosophers *philo, char *action)
 	if (ft_strncmp(action, "has eaten enough", 16) == 0)
 		printf("\tall meals eaten\n");
 	else
-		printf("%lu\t%d id:%d %s\n", get_time_in_ms()
-			- philo->data->input->start_time, philo->meals_eaten, philo->id,
-			action);
+		printf("%lu\t%d %s\n", get_time_in_ms()
+			- philo->data->input->start_time, philo->meals_eaten, action);
 	// printf("id:\t\t%d\nmeal_eaten:\t%d\n", philo->id, philo->meals_eaten);
 	pthread_mutex_unlock(&philo->data->print_lock);
+}
+
+void	delay(int delayed_time)
+{
+	unsigned long	start_time;
+	
+	start_time = get_time_in_ms();
+	while (get_time_in_ms() - start_time < (unsigned long) delayed_time)
+		usleep(1);
 }
