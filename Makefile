@@ -31,4 +31,17 @@ clean		:
 fclean		:	clean
 				rm -rf $(NAME)
 
+git:
+	@msg="$(wordlist 2,999,$(MAKECMDGOALS))"; \
+	if [ -z "$$msg" ]; then \
+		echo "Error: You must provide a commit message."; \
+		exit 1; \
+	fi; \
+	git add .; \
+	git commit -m "$$msg"; \
+	git push
+
+%:
+	@:
+
 re			:	fclean all
