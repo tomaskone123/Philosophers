@@ -6,7 +6,7 @@
 /*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:49:37 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/06 14:52:42 by tomas            ###   ########.fr       */
+/*   Updated: 2025/02/06 16:02:45 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ void	*stopprocess(t_data *data, int i)
 	else
 		print_action(data->philos[i], "died");
 	pthread_mutex_lock(&data->simulation_lock);
+	// pthread_mutex_lock(&data->print_lock); // here
+
 	data->is_running = 0;
 	pthread_mutex_unlock(&data->simulation_lock);
 	pthread_mutex_unlock(&data->philos[i]->meal_lock);
+
 	return (NULL);
 }
 
