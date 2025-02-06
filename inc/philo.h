@@ -6,7 +6,7 @@
 /*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 21:18:48 by tomas            ###   ########.fr       */
+/*   Updated: 2025/02/06 15:19:37 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_data
 
 typedef struct s_philosophers
 {
+	int							first_f;
+	int							second_f;
 	int							id;
 	int							meals_eaten;
 	size_t						last_meal_time;

@@ -6,7 +6,7 @@
 /*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 22:09:37 by tomas            ###   ########.fr       */
+/*   Updated: 2025/02/06 15:31:49 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ static void	*only_one_philo(t_philosophers *philo)
 {
 	print_action(philo, "has taken a fork");
 	delay(philo->input->time_to_die);
-	philo->last_meal_time = get_time_in_ms();
+	pthread_mutex_lock(&philo->meal_lock);
+	// 	philo->last_meal_time = 0;
 	philo->meals_eaten++;
+	pthread_mutex_unlock(&philo->meal_lock);
 	return (NULL);
 }
 
@@ -64,7 +66,7 @@ void	*monitor(void *arg)
 		while (i < data->input->number_of_philos)
 		{
 			pthread_mutex_lock(&data->philos[i]->meal_lock);
-			if (data->philos[i]->last_meal_time > 0 && get_time_in_ms()
+			if (data->philos[i]->meals_eaten > 0 && get_time_in_ms()
 				- data->philos[i]->last_meal_time > data->input->time_to_die)
 				return (stopprocess(data, i));
 			pthread_mutex_unlock(&data->philos[i]->meal_lock);

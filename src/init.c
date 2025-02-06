@@ -6,7 +6,7 @@
 /*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/06 14:42:53 by tomas            ###   ########.fr       */
+/*   Updated: 2025/02/06 15:19:17 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	init_philos(t_data *data, int n_of_philos)
 		data->philos[i] = malloc(sizeof(t_philosophers));
 		if (!data->philos[i])
 			return (error(INCORRECT_MALLOC, data));
+		data->philos[i]->first_f = 0;
+		data->philos[i]->second_f = 0;
 		data->philos[i]->id = i + 1;
 		data->philos[i]->meals_eaten = 0;
 		data->philos[i]->last_meal_time = 0;

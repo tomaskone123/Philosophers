@@ -6,7 +6,7 @@
 /*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 21:24:14 by tomas            ###   ########.fr       */
+/*   Updated: 2025/02/06 15:22:14 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	take_fork(t_philosophers *philo)
 	if (!check_running(philo))
 		return ;
 	pthread_mutex_lock(&philo->data->forks[first_fork]);
+	philo->first_f = 1;
 	print_action(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->data->forks[second_fork]);
+	philo->second_f = 1;
 	print_action(philo, "has taken a fork");
 }
 
@@ -69,8 +71,16 @@ void	put_fork(t_philosophers *philo)
 		second_fork = philo->id - 1;
 		first_fork = (philo->id) % philo->input->number_of_philos;
 	}
-	pthread_mutex_unlock(&philo->data->forks[first_fork]);
-	pthread_mutex_unlock(&philo->data->forks[second_fork]);
+	if (philo->first_f == 1)
+	{
+		pthread_mutex_unlock(&philo->data->forks[first_fork]);
+		philo->first_f = 0;
+	}
+	if (philo->second_f == 1)
+	{
+		pthread_mutex_unlock(&philo->data->forks[second_fork]);
+		philo->second_f = 0;
+	}
 }
 
 void	sleeps(t_philosophers *philo)
