@@ -6,7 +6,7 @@
 /*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/05 22:09:46 by tomas            ###   ########.fr       */
+/*   Updated: 2025/02/06 14:42:53 by tomas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	init_thread(t_data *data)
 	{
 		if (pthread_join(data->philos[i]->thread, NULL))
 			return (error(JOIN_ERROR, data));
+		i++;
 	}
 	if (pthread_join(data->monitor, NULL))
 		return (error(JOIN_ERROR, data));
