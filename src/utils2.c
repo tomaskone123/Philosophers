@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:49:37 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 14:16:43 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:10:19 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	*stopprocess(t_data *data, int i)
 		print_action(data->philos[i], "has eaten enough");
 	else
 		print_action(data->philos[i], "DIED");
+	pthread_mutex_unlock(&data->philos[i]->meal_lock);
 	pthread_mutex_lock(&data->simulation_lock);
 	data->is_running = 0;
 	pthread_mutex_unlock(&data->simulation_lock);
-	pthread_mutex_unlock(&data->philos[i]->meal_lock);
 	return (NULL);
 }
 
@@ -56,9 +56,9 @@ int	check_running(t_philosophers *philo)
 
 void	philo_actions(t_philosophers *philo)
 {
+	think(philo);
 	take_fork(philo);
 	eat(philo);
 	put_fork(philo);
 	sleeps(philo);
-	think(philo);
 }

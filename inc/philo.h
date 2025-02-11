@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 14:07:04 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:46:22 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_philosophers
 	int							second_f;
 	int							id;
 	int							meals_eaten;
+	int							is_full;
 	size_t						last_meal_time;
 	pthread_t					thread;
 	pthread_mutex_t				meal_lock;

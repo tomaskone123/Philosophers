@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 14:16:29 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:10:06 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*philo_lifecycle(void *arg)
 	if (philo->id % 2 == 0)
 	{
 		think(philo);
-		delay(philo->input->time_to_eat);
+		delay(philo->input->time_to_eat / 2);
 	}
 	while (1)
 	{
@@ -61,10 +61,14 @@ void	*monitor(void *arg)
 		while (i < data->input->number_of_philos)
 		{
 			pthread_mutex_lock(&data->philos[i]->meal_lock);
-			if (data->philos[i]->meals_eaten >= data->input->meals_required)
+			if (data->philos[i]->meals_eaten >= data->input->meals_required
+				&& !data->philos[i]->is_full && data->input->meals_required > 0)
+			{
+				data->philos[i]->is_full = 1;
 				data->overall_meals++;
+			}
 			if (data->philos[i]->meals_eaten > 0 && get_time_in_ms()
-				- data->philos[i]->last_meal_time > data->input->time_to_die)
+					- data->philos[i]->last_meal_time > data->input->time_to_die)
 				return (stopprocess(data, i));
 			pthread_mutex_unlock(&data->philos[i]->meal_lock);
 			i++;
