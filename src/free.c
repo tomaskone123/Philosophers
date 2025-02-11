@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:49:26 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 12:42:21 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:52:30 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,20 @@ void	free_mutex(t_data *data)
 	pthread_mutex_destroy(&data->print_lock);
 }
 
-void	join_threads(t_data *data)
+int	join_threads(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->input->number_of_philos)
 	{
-		pthread_join(data->philos[i]->thread, NULL);
+		if (pthread_join(data->philos[i]->thread, NULL))
+			return (error(JOIN_ERROR, data));
 		i++;
 	}
-	pthread_join(data->monitor, NULL);
+	if (pthread_join(data->monitor, NULL))
+		return (error(JOIN_ERROR, data));
+	return (0);
 }
 
 void	free_all(t_data *data)
@@ -46,6 +49,7 @@ void	free_all(t_data *data)
 
 	i = 0;
 	free_mutex(data);
+	// join_threads(data);
 	while (i < data->input->number_of_philos)
 	{
 		free(data->philos[i]);

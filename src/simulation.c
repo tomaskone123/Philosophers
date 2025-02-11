@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 16:20:54 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:24:11 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,8 @@ void	print_action(t_philosophers *philo, char *action)
 		printf("%lu\tALL MEALS EATEN\n", get_time_in_ms()
 			- philo->data->input->start_time);
 	else
-		printf("%lu\t%d %s\nmealseaten: %d\n", get_time_in_ms()
-			- philo->data->input->start_time, philo->id, action,
-			philo->meals_eaten);
+		printf("%lu\t%d %s\n", get_time_in_ms()
+			- philo->data->input->start_time, philo->id, action);
 	pthread_mutex_unlock(&philo->data->print_lock);
 }
 
