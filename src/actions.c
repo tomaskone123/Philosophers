@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 14:02:55 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:13:15 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void	eat(t_philosophers *philo)
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->last_meal_time = get_time_in_ms();
 	philo->meals_eaten++;
+	if (philo->meals_eaten == philo->input->meals_required)
+	{
+		philo->is_full = 1;
+		philo->data->full_philos++;
+	}
 	pthread_mutex_unlock(&philo->meal_lock);
 	print_action(philo, "is eating");
 	delay(philo->input->time_to_eat);

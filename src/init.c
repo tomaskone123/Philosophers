@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 14:46:42 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:15:16 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	init_data(t_data *data, t_input *input)
 	data->is_running = 1;
 	data->input = input;
 	data->all_meals_eaten = 0;
-	data->overall_meals = 0;
+	data->full_philos = 0;
 	if (init_mutex(data, input->number_of_philos))
 		return (ERROR);
 	if (init_philos(data, input->number_of_philos))

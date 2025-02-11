@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 14:46:22 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:12:59 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_data
 	pthread_t					monitor;
 	t_input						*input;
 	int							all_meals_eaten;
-	int							overall_meals;
+	int							full_philos;
 	int							is_running;
 }								t_data;
 

@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:49:37 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 15:10:19 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:15:32 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 void	*stopprocess(t_data *data, int i)
 {
-	if (data->overall_meals == data->input->number_of_philos)
+	if (data->all_meals_eaten)
 		print_action(data->philos[i], "has eaten enough");
 	else
 		print_action(data->philos[i], "DIED");
