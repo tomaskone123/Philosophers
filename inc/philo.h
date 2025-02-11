@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomas <tomas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/06 15:19:37 by tomas            ###   ########.fr       */
+/*   Updated: 2025/02/11 14:07:04 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_data
 	pthread_t					monitor;
 	t_input						*input;
 	int							all_meals_eaten;
+	int							overall_meals;
 	int							is_running;
 }								t_data;
 
@@ -104,5 +105,6 @@ void							eat(t_philosophers *philo);
 void							take_fork(t_philosophers *philo);
 void							think(t_philosophers *philo);
 void							sleeps(t_philosophers *philo);
+void							philo_actions(t_philosophers *philo);
 
 #endif

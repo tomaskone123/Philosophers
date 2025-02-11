@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:03:30 by tomas             #+#    #+#             */
-/*   Updated: 2025/02/03 15:30:35 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:03:23 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_atoi(const char *nptr)
 
 static int	ft_isdigit(int c)
 {
-	if ((c >= '0' && c <= '9') || c == '-' || c == '+')
+	if ((c >= '0' && c <= '9') || c == '+')
 		return (1);
 	return (0);
 }
@@ -62,7 +62,7 @@ int	numbercheck(char *argv[], int argc)
 		{
 			if (!ft_isdigit(argv[i][j]))
 			{
-				printf("Error\nOne of the inputs wasn't a number");
+				printf("Error\nOne of the inputs wasn't a valid number");
 				return (ERROR);
 			}
 			j++;
