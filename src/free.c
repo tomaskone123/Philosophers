@@ -25,6 +25,8 @@ void	free_mutex(t_data *data)
 	}
 	pthread_mutex_destroy(&data->simulation_lock);
 	pthread_mutex_destroy(&data->print_lock);
+	//TEST
+	pthread_mutex_destroy(&data->data_lock);
 }
 
 int	join_threads(t_data *data)

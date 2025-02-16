@@ -31,7 +31,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 void	*stopprocess(t_data *data, int i)
 {
-	if (data->all_meals_eaten)
+
+	if (data->full_philos == data->input->number_of_philos)
 		print_action(data->philos[i], "has eaten enough");
 	else
 		print_action(data->philos[i], "died");
@@ -39,6 +40,8 @@ void	*stopprocess(t_data *data, int i)
 	pthread_mutex_lock(&data->simulation_lock);
 	data->is_running = 0;
 	pthread_mutex_unlock(&data->simulation_lock);
+	//TEST
+	pthread_mutex_unlock(&data->data_lock);
 	return (NULL);
 }
 

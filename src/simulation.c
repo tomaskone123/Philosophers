@@ -58,13 +58,17 @@ void	*monitor(void *arg)
 		while (i < data->input->number_of_philos)
 		{
 			pthread_mutex_lock(&data->philos[i]->meal_lock);
-			if (data->full_philos == data->input->number_of_philos)
-				data->all_meals_eaten = 1;
+			//TEST
+			pthread_mutex_lock(&data->data_lock);
 			if (data->philos[i]->meals_eaten > 0 && get_time_in_ms()
 				- data->philos[i]->last_meal_time > data->input->time_to_die)
 				return (stopprocess(data, i));
-			if (data->all_meals_eaten)
+			
+			//TEST
+			if (data->full_philos == data->input->number_of_philos)
 				return (stopprocess(data, i));
+			pthread_mutex_unlock(&data->data_lock);
+
 			pthread_mutex_unlock(&data->philos[i]->meal_lock);
 			i++;
 		}

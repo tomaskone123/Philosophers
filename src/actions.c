@@ -22,7 +22,10 @@ void	eat(t_philosophers *philo)
 	if (philo->meals_eaten == philo->input->meals_required)
 	{
 		philo->is_full = 1;
+		//TEST
+		pthread_mutex_lock(&philo->data->data_lock);
 		philo->data->full_philos++;
+		pthread_mutex_unlock(&philo->data->data_lock);
 	}
 	pthread_mutex_unlock(&philo->meal_lock);
 	print_action(philo, "is eating");

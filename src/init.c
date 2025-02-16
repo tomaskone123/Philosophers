@@ -53,6 +53,9 @@ int	init_mutex(t_data *data, int n_of_philos)
 		return (error(INCORRECT_MALLOC, NULL));
 	if (pthread_mutex_init(&data->simulation_lock, NULL))
 		return (error(INCORRECT_MUTEX, NULL));
+	//TEST
+	if (pthread_mutex_init(&data->data_lock, NULL))
+		return (error(INCORRECT_MUTEX, NULL));
 	while (i < n_of_philos)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL))

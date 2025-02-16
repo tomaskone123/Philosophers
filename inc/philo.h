@@ -49,7 +49,9 @@ typedef struct s_data
 {
 	pthread_mutex_t				*forks;
 	pthread_mutex_t				print_lock;
-	pthread_mutex_t				simulation_lock;
+	pthread_mutex_t				simulation_lock;	//checks if the simulation should still be running
+	pthread_mutex_t				data_lock;
+
 	t_philosophers				**philos;
 	pthread_t					monitor;
 	t_input						*input;
