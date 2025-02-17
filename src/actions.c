@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/17 14:50:21 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:18:42 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,27 @@ void	take_fork(t_philosophers *philo)
 	int	first_fork;
 	int	second_fork;
 
+	if (!check_running(philo))
+		return ;
 	if (philo->id % 2 == 0)
 	{
 		first_fork = (philo->id) % philo->input->number_of_philos;
 		second_fork = philo->id - 1;
+		pthread_mutex_lock(&philo->data->forks[first_fork]);
+		philo->first_f = 1;
+		pthread_mutex_lock(&philo->data->forks[second_fork]);
+		philo->second_f = 1;
 	}
 	else
 	{
 		first_fork = philo->id - 1;
 		second_fork = (philo->id) % philo->input->number_of_philos;
+		pthread_mutex_lock(&philo->data->forks[second_fork]);
+		philo->first_f = 1;
+		pthread_mutex_lock(&philo->data->forks[first_fork]);
+		philo->second_f = 1;
 	}
-	if (!check_running(philo))
-		return ;
-	pthread_mutex_lock(&philo->data->forks[first_fork]);
-	philo->first_f = 1;
-	print_action(philo, "has taken a fork ");
-	pthread_mutex_lock(&philo->data->forks[second_fork]);
-	philo->second_f = 1;
+	print_action(philo, "has taken a fork");
 	print_action(philo, "has taken a fork");
 }
 
