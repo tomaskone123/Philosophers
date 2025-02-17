@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/17 14:29:11 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:50:21 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	take_fork(t_philosophers *philo)
 		return ;
 	pthread_mutex_lock(&philo->data->forks[first_fork]);
 	philo->first_f = 1;
-	print_action(philo, "has taken a fork");
+	print_action(philo, "has taken a fork ");
 	pthread_mutex_lock(&philo->data->forks[second_fork]);
 	philo->second_f = 1;
 	print_action(philo, "has taken a fork");
