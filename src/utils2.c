@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:49:37 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/17 13:19:12 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:11:49 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	check_running(t_philosophers *philo)
 
 void	philo_actions(t_philosophers *philo)
 {
-	think(philo);
 	take_fork(philo);
 	eat(philo);
 	put_fork(philo);
 	sleeps(philo);
+	think(philo);
 }

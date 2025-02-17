@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/17 13:26:40 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:13:54 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*philo_lifecycle(void *arg)
 		return (NULL);
 	if (philo->data->input->number_of_philos == 1)
 		return (only_one_philo(philo));
-	if (philo->id % 2 == 0)
+	if (philo->id % 2 != 1)
 	{
 		think(philo);
 		delay(philo->input->time_to_eat);

@@ -6,30 +6,11 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/17 13:18:10 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:29:11 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-
-void	eat(t_philosophers *philo)
-{
-	if (!check_running(philo))
-		return ;
-	pthread_mutex_lock(&philo->meal_lock);
-	philo->last_meal_time = get_time_in_ms();
-	philo->meals_eaten++;
-	if (philo->meals_eaten == philo->input->meals_required)
-	{
-		philo->is_full = 1;
-		pthread_mutex_lock(&philo->data->data_lock);
-		philo->data->full_philos++;
-		pthread_mutex_unlock(&philo->data->data_lock);
-	}
-	pthread_mutex_unlock(&philo->meal_lock);
-	print_action(philo, "is eating");
-	delay(philo->input->time_to_eat);
-}
 
 void	think(t_philosophers *philo)
 {
@@ -45,13 +26,13 @@ void	take_fork(t_philosophers *philo)
 
 	if (philo->id % 2 == 0)
 	{
-		first_fork = philo->id - 1;
-		second_fork = (philo->id) % philo->input->number_of_philos;
+		first_fork = (philo->id) % philo->input->number_of_philos;
+		second_fork = philo->id - 1;
 	}
 	else
 	{
-		second_fork = philo->id - 1;
-		first_fork = (philo->id) % philo->input->number_of_philos;
+		first_fork = philo->id - 1;
+		second_fork = (philo->id) % philo->input->number_of_philos;
 	}
 	if (!check_running(philo))
 		return ;
@@ -70,13 +51,13 @@ void	put_fork(t_philosophers *philo)
 
 	if (philo->id % 2 == 0)
 	{
-		first_fork = philo->id - 1;
-		second_fork = (philo->id) % philo->input->number_of_philos;
+		first_fork = (philo->id) % philo->input->number_of_philos;
+		second_fork = philo->id - 1;
 	}
 	else
 	{
-		second_fork = philo->id - 1;
-		first_fork = (philo->id) % philo->input->number_of_philos;
+		first_fork = philo->id - 1;
+		second_fork = (philo->id) % philo->input->number_of_philos;
 	}
 	if (philo->first_f == 1)
 	{
@@ -96,4 +77,23 @@ void	sleeps(t_philosophers *philo)
 		return ;
 	print_action(philo, "is sleeping");
 	delay(philo->input->time_to_sleep);
+}
+
+void	eat(t_philosophers *philo)
+{
+	if (!check_running(philo))
+		return ;
+	pthread_mutex_lock(&philo->meal_lock);
+	print_action(philo, "is eating");
+	philo->last_meal_time = get_time_in_ms();
+	philo->meals_eaten++;
+	if (philo->meals_eaten == philo->input->meals_required)
+	{
+		philo->is_full = 1;
+		pthread_mutex_lock(&philo->data->data_lock);
+		philo->data->full_philos++;
+		pthread_mutex_unlock(&philo->data->data_lock);
+	}
+	pthread_mutex_unlock(&philo->meal_lock);
+	delay(philo->input->time_to_eat);
 }
