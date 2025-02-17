@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/17 17:18:42 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/17 20:42:08 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	think(t_philosophers *philo)
 	if (!check_running(philo))
 		return ;
 	print_action(philo, "is thinking");
+	delay(1);
 }
 
 void	take_fork(t_philosophers *philo)
@@ -39,9 +40,9 @@ void	take_fork(t_philosophers *philo)
 	{
 		first_fork = philo->id - 1;
 		second_fork = (philo->id) % philo->input->number_of_philos;
-		pthread_mutex_lock(&philo->data->forks[second_fork]);
-		philo->first_f = 1;
 		pthread_mutex_lock(&philo->data->forks[first_fork]);
+		philo->first_f = 1;
+		pthread_mutex_lock(&philo->data->forks[second_fork]);
 		philo->second_f = 1;
 	}
 	print_action(philo, "has taken a fork");
