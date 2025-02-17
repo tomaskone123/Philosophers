@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/17 20:42:08 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/17 20:56:32 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	take_fork(t_philosophers *philo)
 		philo->second_f = 1;
 	}
 	print_action(philo, "has taken a fork");
-	print_action(philo, "has taken a fork");
+	print_action(philo, "has taken a fork ");
 }
 
 void	put_fork(t_philosophers *philo)
