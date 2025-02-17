@@ -80,11 +80,12 @@ void							free_all(t_data *data);
 int								inputload(char **argv, t_input *input,
 									int argc);
 unsigned long					get_time_in_ms(void);
-void							print_actions(t_philosophers *philo,
-									char *action);
-void							better_sleeps(unsigned long time_in_ms);
 void							print_action(t_philosophers *philo,
 									char *action);
+void							print_fork(t_philosophers *philo,
+									int fork);
+void							better_sleeps(unsigned long time_in_ms);
+
 void							*stopprocess(t_data *data, int i);
 int								ft_strncmp(const char *s1, const char *s2,
 									size_t n);

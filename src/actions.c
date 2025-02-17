@@ -57,10 +57,10 @@ void	take_fork(t_philosophers *philo)
 		return ;
 	pthread_mutex_lock(&philo->data->forks[first_fork]);
 	philo->first_f = 1;
-	print_action(philo, "has taken a fork");
+	print_fork(philo, first_fork);
 	pthread_mutex_lock(&philo->data->forks[second_fork]);
 	philo->second_f = 1;
-	print_action(philo, "has taken a fork");
+	print_fork(philo, second_fork);
 }
 
 void	put_fork(t_philosophers *philo)
