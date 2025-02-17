@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:20:06 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 16:52:27 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:18:37 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	init_mutex(t_data *data, int n_of_philos)
 		return (error(INCORRECT_MALLOC, NULL));
 	if (pthread_mutex_init(&data->simulation_lock, NULL))
 		return (error(INCORRECT_MUTEX, NULL));
-	//TEST
 	if (pthread_mutex_init(&data->data_lock, NULL))
 		return (error(INCORRECT_MUTEX, NULL));
 	while (i < n_of_philos)

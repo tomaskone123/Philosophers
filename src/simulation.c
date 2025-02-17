@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/11 16:24:11 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:26:40 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*philo_lifecycle(void *arg)
 	if (philo->id % 2 == 0)
 	{
 		think(philo);
-		delay(philo->input->time_to_eat / 2);
+		delay(philo->input->time_to_eat);
 	}
 	while (1)
 	{
@@ -58,17 +58,13 @@ void	*monitor(void *arg)
 		while (i < data->input->number_of_philos)
 		{
 			pthread_mutex_lock(&data->philos[i]->meal_lock);
-			//TEST
 			pthread_mutex_lock(&data->data_lock);
 			if (data->philos[i]->meals_eaten > 0 && get_time_in_ms()
 				- data->philos[i]->last_meal_time > data->input->time_to_die)
 				return (stopprocess(data, i));
-			
-			//TEST
 			if (data->full_philos == data->input->number_of_philos)
 				return (stopprocess(data, i));
 			pthread_mutex_unlock(&data->data_lock);
-
 			pthread_mutex_unlock(&data->philos[i]->meal_lock);
 			i++;
 		}
