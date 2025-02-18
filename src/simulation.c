@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/17 17:09:44 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:26:44 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ void	*monitor(void *arg)
 	t_data	*data;
 	int		i;
 
-	i = 0;
 	data = (t_data *)arg;
+	if (data->input->meals_required == 0)
+		return (NULL);
 	while (1)
 	{
 		i = 0;

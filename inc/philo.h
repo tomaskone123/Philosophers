@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:22:11 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/17 13:43:19 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:45:05 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ typedef enum e_msg
 	INCORRECT_THREAD = 3,
 	JOIN_ERROR = 4,
 }								t_msg;
+
+typedef enum e_status
+{
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DIED,
+	FINISH_EATING
+}								t_status;
 
 typedef struct s_input
 {
