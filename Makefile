@@ -1,4 +1,4 @@
-NAME		=	Philosophers
+NAME		=	philo
 
 HEADER		=	./inc
 
@@ -8,13 +8,13 @@ CFLAGS		=	-Werror -Wall -Wextra -g -I $(HEADER) -pthread
 
 SRCS		=	src/main.c \
 				src/init.c \
-				src/utils.c \
 				src/free.c \
 				src/error.c \
-				src/simulation.c \
+				src/utils.c \
 				src/utils2.c \
-				src/actions.c \
 				src/log.c \
+				src/actions.c \
+				src/simulation.c \
 
 
 OBJS		=	$(SRCS:.c=.o)

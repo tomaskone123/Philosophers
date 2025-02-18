@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:53:19 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/17 20:56:32 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:06:06 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	think(t_philosophers *philo)
 {
 	if (!check_running(philo))
 		return ;
-	print_action(philo, "is thinking");
+	print_action(philo, THINK);
 	delay(1);
 }
 
@@ -45,8 +45,8 @@ void	take_fork(t_philosophers *philo)
 		pthread_mutex_lock(&philo->data->forks[second_fork]);
 		philo->second_f = 1;
 	}
-	print_action(philo, "has taken a fork");
-	print_action(philo, "has taken a fork ");
+	print_action(philo, FORK);
+	print_action(philo, FORK);
 }
 
 void	put_fork(t_philosophers *philo)
@@ -80,7 +80,7 @@ void	sleeps(t_philosophers *philo)
 {
 	if (!check_running(philo))
 		return ;
-	print_action(philo, "is sleeping");
+	print_action(philo, SLEEP);
 	delay(philo->input->time_to_sleep);
 }
 
@@ -89,7 +89,7 @@ void	eat(t_philosophers *philo)
 	if (!check_running(philo))
 		return ;
 	pthread_mutex_lock(&philo->meal_lock);
-	print_action(philo, "is eating");
+	print_action(philo, EAT);
 	philo->last_meal_time = get_time_in_ms();
 	philo->meals_eaten++;
 	if (philo->meals_eaten == philo->input->meals_required)

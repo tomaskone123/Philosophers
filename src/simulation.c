@@ -6,7 +6,7 @@
 /*   By: tkonecny <tkonecny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:08:14 by tkonecny          #+#    #+#             */
-/*   Updated: 2025/02/18 14:26:44 by tkonecny         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:17:14 by tkonecny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	*only_one_philo(t_philosophers *philo)
 {
-	print_action(philo, "has taken a fork");
+	print_action(philo, FORK);
 	delay(philo->input->time_to_die);
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->meals_eaten++;
@@ -72,27 +72,4 @@ void	*monitor(void *arg)
 		delay(1);
 	}
 	return (NULL);
-}
-
-void	print_action(t_philosophers *philo, char *action)
-{
-	if (!check_running(philo))
-		return ;
-	pthread_mutex_lock(&philo->data->print_lock);
-	if (ft_strncmp(action, "has eaten enough", 16) == 0)
-		printf("%lu\tALL MEALS EATEN\n", get_time_in_ms()
-			- philo->data->input->start_time);
-	else
-		printf("%lu\t\t%d %s\n", get_time_in_ms()
-			- philo->data->input->start_time, philo->id, action);
-	pthread_mutex_unlock(&philo->data->print_lock);
-}
-
-void	delay(int delayed_time)
-{
-	unsigned long	start_time;
-
-	start_time = get_time_in_ms();
-	while (get_time_in_ms() - start_time < (unsigned long)delayed_time)
-		usleep(1);
 }
