@@ -47,9 +47,8 @@ This runs a simulation with 5 philosophers, each having 800ms before starving, 2
 ## Debugging
 - Run with Valgrind to check for memory leaks:
   ```sh
-  valgrind --leak-check=full --track-origins=yes ./philosophers 5 800 200 200
+  valgrind --tool=helgrind -s ./philosophers 5 800 200 200
   ```
-- Use `printf` debugging to track the philosophers' actions.
 
 ## License
 This project follows the 42 Network guidelines and is intended for educational purposes.
