@@ -45,7 +45,7 @@ This runs a simulation with 5 philosophers, each having 800ms before starving, 2
 - Ensure the input values are valid to avoid undefined behavior.
 
 ## Debugging
-- Run with Valgrind to check for memory leaks:
+- Run with Valgrind to check for memory leaks, memory races or deadlocks:
   ```sh
   valgrind --tool=helgrind -s ./philosophers 5 800 200 200
   valgrind --leak-check=full --track-origins=yes ./philosophers 5 800 200 200
