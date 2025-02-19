@@ -1,4 +1,4 @@
-NAME		=	philo
+NAME		=	Philosophers
 
 HEADER		=	./inc
 
@@ -32,20 +32,5 @@ clean		:
 
 fclean		:	clean
 				rm -rf $(NAME)
-
-git			:	fclean
-	@msg="$(wordlist 2,999,$(MAKECMDGOALS))"; \
-	if [ -z "$$msg" ]; then \
-		echo "Error: You must provide a commit message."; \
-		exit 1; \
-	fi; \
-	git add . > /dev/null 2>&1; \
-	git commit -m "$$msg" > /dev/null 2>&1; \
-	git push > /dev/null 2>&1; \
-	echo "Last commit:"; \
-	git log -1
-
-%:
-	@:
 
 re			:	fclean all
